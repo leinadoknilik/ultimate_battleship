@@ -6,7 +6,7 @@ public class GamePlay {
 
 	public static void main(String[] args) {
 
-		Commandant tw = new Commandant(1000,1000);
+		Commandant tw = new Commandant(20,20);
 		tw.run();
 
 	}

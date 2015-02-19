@@ -44,11 +44,28 @@ public class Board {
 	private boolean placeablePoints(List<Point> points, int x, int y) {
 		boolean placeable = true;
 		for (Point point : points) {
-			if (x + point.x >= maxX || y + point.y >= maxY || board[x + point.x][y + point.y] != 0) {
+			if (xCoordinateBiggerThanBoard(x, point) || yCoordinateBiggerThanBoard(y, point) || pointNotFitOnBoard(x, y, point)) {
 				placeable = false;
 			}
+			
+			if(x>1 && board[x-1][y]!=0){placeable = false;}
+			if(y>1 && board[x][y-1]!=0){placeable = false;}
+			if(x<maxX-1 && board[x+1][y]!=0){placeable = false;}
+			if(y<maxY-1 && board[x][y+1]!=0){placeable = false;}
 		}
 		return placeable;
+	}
+
+	private boolean pointNotFitOnBoard(int x, int y, Point point) {
+		return board[x + point.x][y + point.y] != 0;
+	}
+
+	private boolean yCoordinateBiggerThanBoard(int y, Point point) {
+		return y + point.y >= maxY;
+	}
+
+	private boolean xCoordinateBiggerThanBoard(int x, Point point) {
+		return x + point.x >= maxX;
 	}
 
 	private List<Point> getPossiblePositions(List<Point> points) {
